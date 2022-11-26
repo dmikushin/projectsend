@@ -13,7 +13,13 @@ MARIADB_ROOT_PASSWORD=setyourpasswordhere!
 
 ## Deployment
 
+1. Deploy the container:
+
 ```
 docker-compose up -d
 ```
 
+2. Go to http://localhost:58080 and configure ProjectSend as shown below:
+
+<img src="screenshots/projectsend_config.png">
+ 
