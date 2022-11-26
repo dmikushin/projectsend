@@ -1,0 +1,28 @@
+---
+version: "2.1"
+services:
+  projectsend_database:
+    image: mariadb
+    container_name: projectsend_database
+    hostname: projectsend_database
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: projectsend
+    volumes:
+      - ${PWD}:/var/lib/mysql
+  projectsend:
+    image: lscr.io/linuxserver/projectsend:latest
+    container_name: projectsend
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+      - MAX_UPLOAD=5000
+    volumes:
+      - ${PWD}/config
+      - ${PWD}/data
+    ports:
+      - 127.0.0.1:58080:80
+    restart: unless-stopped
+
