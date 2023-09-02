@@ -23,6 +23,18 @@ services:
       - ${PWD}/config
       - ${PWD}/data
     ports:
-      - 127.0.0.1:58080:80
+      - 172.17.0.1:58080:80
     restart: unless-stopped
-
+  autossh:
+    image: jnovack/autossh
+    container_name: autossh-projectsend
+    environment:
+      - SSH_REMOTE_USER=projectsend
+      - SSH_REMOTE_HOST=gateway.mikush.in
+      - SSH_REMOTE_PORT=2221
+      - SSH_TARGET_HOST=172.17.0.1
+      - SSH_TARGET_PORT=58080
+      - SSH_TUNNEL_PORT=58080
+    restart: always
+    volumes:
+      - ${PWD}/id_rsa:/id_rsa
