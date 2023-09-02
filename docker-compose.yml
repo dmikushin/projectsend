@@ -10,7 +10,7 @@ services:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
       MARIADB_DATABASE: projectsend
     volumes:
-      - ${PWD}:/var/lib/mysql
+      - ${PWD}/database:/var/lib/mysql
   projectsend:
     image: lscr.io/linuxserver/projectsend:latest
     container_name: projectsend
@@ -20,8 +20,8 @@ services:
       - TZ=Europe/Zurich
       - MAX_UPLOAD=5000
     volumes:
-      - ${PWD}/config
-      - ${PWD}/data
+      - ${PWD}/projectsend/config
+      - ${PWD}/projectsend/data
     ports:
       - 172.17.0.1:58080:80
     restart: unless-stopped
